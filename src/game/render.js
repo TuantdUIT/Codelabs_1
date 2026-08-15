@@ -1,60 +1,24 @@
 import { ionLabel } from './ions.js';
-import { CANNON_X } from './engine.js';
+import * as G from './grid.js';
 
-export function drawFrame(ctx, engine, aim) {
-  const { width, height } = engine;
-  ctx.clearRect(0, 0, width, height);
+export function drawFrame(ctx, engine) {
+  ctx.clearRect(0, 0, G.WIDTH, G.HEIGHT);
+  drawBackground(ctx);
+  drawDeathLine(ctx);
 
-  // background grid glow
-  const grad = ctx.createLinearGradient(0, 0, width, height);
-  grad.addColorStop(0, '#0b1220');
-  grad.addColorStop(1, '#111a2e');
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, width, height);
-
-  ctx.save();
-  ctx.strokeStyle = 'rgba(255,255,255,0.04)';
-  ctx.lineWidth = 1;
-  for (let x = 0; x < width; x += 40) {
-    ctx.beginPath();
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x, height);
-    ctx.stroke();
+  for (const bubble of engine.grid.values()) {
+    drawBubble(ctx, G.cellX(bubble.row, bubble.col), G.cellY(bubble.row), bubble.ion, G.R);
   }
-  for (let y = 0; y < height; y += 40) {
-    ctx.beginPath();
-    ctx.moveTo(0, y);
-    ctx.lineTo(width, y);
-    ctx.stroke();
-  }
-  ctx.restore();
-
-  // danger zone at left edge
-  const dz = ctx.createLinearGradient(0, 0, 90, 0);
-  dz.addColorStop(0, 'rgba(255,60,60,0.35)');
-  dz.addColorStop(1, 'rgba(255,60,60,0)');
-  ctx.fillStyle = dz;
-  ctx.fillRect(0, 0, 90, height);
-
-  // bubbles
-  for (const b of engine.bubbles) {
-    drawBubble(ctx, b);
+  for (const bubble of engine.falling) {
+    ctx.save();
+    ctx.globalAlpha = 0.85;
+    drawBubble(ctx, bubble.x, bubble.y, bubble.ion, G.R);
+    ctx.restore();
   }
 
-  // projectiles
-  for (const p of engine.projectiles) {
-    const x = p.fromX + (p.toX - p.fromX) * p.t;
-    const y = p.fromY + (p.toY - p.fromY) * p.t;
-    ctx.beginPath();
-    ctx.arc(x, y, 8, 0, Math.PI * 2);
-    ctx.fillStyle = p.ion.color;
-    ctx.shadowColor = p.ion.color;
-    ctx.shadowBlur = 12;
-    ctx.fill();
-    ctx.shadowBlur = 0;
-  }
+  if (!engine.gameOver && !engine.shot) drawAim(ctx, engine);
+  if (engine.shot) drawBubble(ctx, engine.shot.x, engine.shot.y, engine.shot.ion, G.R);
 
-  // particles
   for (const particle of engine.particles) {
     ctx.globalAlpha = Math.max(0, particle.life / particle.maxLife);
     ctx.beginPath();
@@ -63,83 +27,137 @@ export function drawFrame(ctx, engine, aim) {
     ctx.fill();
   }
   ctx.globalAlpha = 1;
-
-  drawCannon(ctx, height, engine.selected, aim);
+  drawCannon(ctx, engine);
 }
 
-function drawBubble(ctx, b) {
-  const { x, y, radius, ion, type, reactingWith, remaining } = b;
+function drawBackground(ctx) {
+  const gradient = ctx.createLinearGradient(0, 0, 0, G.HEIGHT);
+  gradient.addColorStop(0, '#0d1526');
+  gradient.addColorStop(1, '#0a101d');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, G.WIDTH, G.HEIGHT);
+
+  ctx.fillStyle = 'rgba(255,255,255,0.025)';
+  ctx.fillRect(G.PLAY_LEFT, 0, G.PLAY_RIGHT - G.PLAY_LEFT, G.HEIGHT - 96);
+
+  ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(G.PLAY_LEFT, 0);
+  ctx.lineTo(G.PLAY_LEFT, G.HEIGHT - 96);
+  ctx.moveTo(G.PLAY_RIGHT, 0);
+  ctx.lineTo(G.PLAY_RIGHT, G.HEIGHT - 96);
+  ctx.stroke();
+}
+
+function drawDeathLine(ctx) {
+  ctx.save();
+  ctx.setLineDash([8, 8]);
+  ctx.strokeStyle = 'rgba(255,90,90,0.5)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(G.PLAY_LEFT, G.DEATH_Y);
+  ctx.lineTo(G.PLAY_RIGHT, G.DEATH_Y);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawBubble(ctx, x, y, ion, radius) {
   ctx.save();
   ctx.beginPath();
   ctx.arc(x, y, radius, 0, Math.PI * 2);
-  const grad = ctx.createRadialGradient(x - radius * 0.3, y - radius * 0.3, radius * 0.1, x, y, radius);
-  grad.addColorStop(0, lighten(ion.color, 0.35));
-  grad.addColorStop(1, ion.color);
-  ctx.fillStyle = grad;
+  const gradient = ctx.createRadialGradient(x - radius * 0.35, y - radius * 0.35, radius * 0.1, x, y, radius);
+  gradient.addColorStop(0, lighten(ion.color, 0.45));
+  gradient.addColorStop(1, ion.color);
+  ctx.fillStyle = gradient;
   ctx.fill();
-  ctx.lineWidth = reactingWith ? 3 : 1.5;
-  ctx.strokeStyle = reactingWith ? '#ffffff' : 'rgba(255,255,255,0.5)';
+  ctx.lineWidth = 1.5;
+  ctx.strokeStyle = 'rgba(0,0,0,0.35)';
   ctx.stroke();
-  ctx.restore();
 
-  ctx.save();
-  ctx.fillStyle = '#0b1220';
-  ctx.font = 'bold 18px "Segoe UI", sans-serif';
+  const label = ionLabel(ion, ion.type);
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText(ionLabel(ion, type), x, y);
-  ctx.restore();
-
-  if (reactingWith && remaining > 0) {
-    ctx.save();
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 11px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText(`còn ${remaining}`, x, y + radius + 14);
-    ctx.restore();
+  let size = 13;
+  ctx.font = `bold ${size}px "Segoe UI", sans-serif`;
+  while (ctx.measureText(label).width > radius * 1.85 && size > 8) {
+    size -= 1;
+    ctx.font = `bold ${size}px "Segoe UI", sans-serif`;
   }
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = 'rgba(0,0,0,0.55)';
+  ctx.strokeText(label, x, y + 1);
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText(label, x, y + 1);
+  ctx.restore();
 }
 
-function drawCannon(ctx, height, selected, aim) {
-  const baseX = CANNON_X;
-  const baseY = height - 40;
-  const angle = aim ? Math.atan2(aim.y - baseY, aim.x - baseX) : 0;
+function drawAim(ctx, engine) {
+  const points = engine.aimPath();
+  ctx.save();
+  ctx.setLineDash([6, 8]);
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = 'rgba(160,200,255,0.55)';
+  ctx.beginPath();
+  ctx.moveTo(points[0].x, points[0].y);
+  for (let i = 1; i < points.length; i++) ctx.lineTo(points[i].x, points[i].y);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  const end = points[points.length - 1];
+  ctx.beginPath();
+  ctx.arc(end.x, end.y, 4, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(160,200,255,0.8)';
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawCannon(ctx, engine) {
+  const { CANNON_X: x, CANNON_Y: y } = G;
 
   ctx.save();
-  ctx.translate(baseX, baseY);
-  ctx.beginPath();
-  ctx.arc(0, 0, 22, 0, Math.PI * 2);
-  ctx.fillStyle = '#1c2740';
+  ctx.translate(x, y);
+  ctx.rotate(engine.aimAngle + Math.PI / 2);
+  ctx.fillStyle = '#243354';
+  roundRect(ctx, -9, -46, 18, 46, 6);
   ctx.fill();
-  ctx.strokeStyle = 'rgba(255,255,255,0.25)';
-  ctx.stroke();
-
-  ctx.rotate(angle);
-  ctx.fillStyle = selected.ion.color;
-  ctx.shadowColor = selected.ion.color;
-  ctx.shadowBlur = 10;
-  ctx.fillRect(0, -6, 32, 12);
-  ctx.shadowBlur = 0;
   ctx.restore();
 
-  if (selected) {
-    ctx.save();
-    ctx.fillStyle = '#dbe7ff';
-    ctx.font = 'bold 12px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText(ionLabel(selected.ion, selected.type), baseX, baseY + 40);
-    ctx.restore();
+  ctx.beginPath();
+  ctx.arc(x, y, 27, 0, Math.PI * 2);
+  ctx.fillStyle = '#1b2740';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  if (engine.ammo[0] && !engine.shot) drawBubble(ctx, x, y, engine.ammo[0], G.R);
+
+  ctx.save();
+  ctx.fillStyle = 'rgba(220,232,255,0.55)';
+  ctx.font = '10px "Segoe UI", sans-serif';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('TIẾP THEO', 16, G.HEIGHT - 62);
+  for (let i = 1; i < engine.ammo.length; i++) {
+    drawBubble(ctx, 26 + (i - 1) * 34, G.HEIGHT - 30, engine.ammo[i], 14);
   }
+  ctx.restore();
+}
+
+function roundRect(ctx, x, y, width, height, radius) {
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.arcTo(x + width, y, x + width, y + height, radius);
+  ctx.arcTo(x + width, y + height, x, y + height, radius);
+  ctx.arcTo(x, y + height, x, y, radius);
+  ctx.arcTo(x, y, x + width, y, radius);
+  ctx.closePath();
 }
 
 function lighten(hex, amount) {
-  const c = hex.replace('#', '');
-  const num = parseInt(c, 16);
-  let r = (num >> 16) & 0xff;
-  let g = (num >> 8) & 0xff;
-  let b = num & 0xff;
-  r = Math.min(255, Math.floor(r + (255 - r) * amount));
-  g = Math.min(255, Math.floor(g + (255 - g) * amount));
-  b = Math.min(255, Math.floor(b + (255 - b) * amount));
-  return `rgb(${r},${g},${b})`;
+  const value = Number.parseInt(hex.replace('#', ''), 16);
+  const rgb = [(value >> 16) & 0xff, (value >> 8) & 0xff, value & 0xff];
+  const lightened = rgb.map((channel) => Math.min(255, Math.floor(channel + (255 - channel) * amount)));
+  return `rgb(${lightened[0]},${lightened[1]},${lightened[2]})`;
 }

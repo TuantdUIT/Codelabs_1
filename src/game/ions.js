@@ -40,18 +40,39 @@ export const CATIONS = [
 ];
 
 export const ANIONS = [
-  { id: 'Cl', symbol: 'Cl', charge: 1, name: 'Clorua', polyatomic: false, color: '#ff6b6b' },
-  { id: 'Br', symbol: 'Br', charge: 1, name: 'Bromua', polyatomic: false, color: '#f4524d' },
-  { id: 'I', symbol: 'I', charge: 1, name: 'Iotua', polyatomic: false, color: '#e6392f' },
-  { id: 'OH', symbol: 'OH', charge: 1, name: 'Hiđroxit', polyatomic: true, color: '#ff8a5c' },
-  { id: 'NO3', symbol: 'NO3', charge: 1, name: 'Nitrat', polyatomic: true, color: '#ff9f43' },
-  { id: 'O', symbol: 'O', charge: 2, name: 'Oxit', polyatomic: false, color: '#ee7c2f' },
-  { id: 'S', symbol: 'S', charge: 2, name: 'Sunfua', polyatomic: false, color: '#d96b2b' },
-  { id: 'SO4', symbol: 'SO4', charge: 2, name: 'Sunfat', polyatomic: true, color: '#c85a28' },
-  { id: 'CO3', symbol: 'CO3', charge: 2, name: 'Cacbonat', polyatomic: true, color: '#b04a22' },
-  { id: 'SO3', symbol: 'SO3', charge: 2, name: 'Sunfit', polyatomic: true, color: '#983e1d' },
-  { id: 'PO4', symbol: 'PO4', charge: 3, name: 'Photphat', polyatomic: true, color: '#f4c430' },
+  { id: 'Cl', symbol: 'Cl', charge: 1, name: 'Clorua', acidName: 'Axit clohiđric', polyatomic: false, color: '#ff6b6b' },
+  { id: 'Br', symbol: 'Br', charge: 1, name: 'Bromua', acidName: 'Axit bromhiđric', polyatomic: false, color: '#f4524d' },
+  { id: 'NO3', symbol: 'NO3', charge: 1, name: 'Nitrat', acidName: 'Axit nitric', polyatomic: true, color: '#ff9f43' },
+  { id: 'OH', symbol: 'OH', charge: 1, name: 'Hiđroxit', acidName: null, polyatomic: true, color: '#ff8a5c' },
+  { id: 'O', symbol: 'O', charge: 2, name: 'Oxit', acidName: null, polyatomic: false, color: '#ee7c2f' },
+  { id: 'S', symbol: 'S', charge: 2, name: 'Sunfua', acidName: 'Axit sunfuhiđric', polyatomic: false, color: '#d96b2b' },
+  { id: 'SO4', symbol: 'SO4', charge: 2, name: 'Sunfat', acidName: 'Axit sunfuric', polyatomic: true, color: '#c85a28' },
+  { id: 'CO3', symbol: 'CO3', charge: 2, name: 'Cacbonat', acidName: 'Axit cacbonic', polyatomic: true, color: '#b04a22' },
+  { id: 'SO3', symbol: 'SO3', charge: 2, name: 'Sunfit', acidName: 'Axit sunfurơ', polyatomic: true, color: '#983e1d' },
+  { id: 'PO4', symbol: 'PO4', charge: 3, name: 'Photphat', acidName: 'Axit photphoric', polyatomic: true, color: '#f4c430' },
 ];
+
+// Distinct bubble colors assigned per run so the active ions never look alike.
+// Cations get cool hues, anions warm hues.
+export const CATION_COLORS = ['#4f9cff', '#21c7b8', '#9d6bff', '#3ddc84', '#7ee1ff', '#c3ccdd'];
+export const ANION_COLORS = ['#ff5a5a', '#ff9f1c', '#ffd93d', '#ff5fbf', '#c98a5b', '#a3324a'];
+
+// Người chơi tự chọn bộ ion trước khi vào ván: ít ion → ít tổ hợp → dễ hơn.
+export const MIN_IONS = 3;
+export const MAX_IONS = Math.min(CATION_COLORS.length, ANION_COLORS.length);
+export const DEFAULT_CATION_IDS = ['Na', 'Ca', 'Al'];
+export const DEFAULT_ANION_IDS = ['Cl', 'SO4', 'OH'];
+
+// Gán màu theo thứ tự đã chọn — dùng chung cho engine lẫn màn hình chọn ion để
+// màu hiển thị ở hai nơi luôn khớp nhau.
+function buildIonSet(pool, ids, colors, type) {
+  return pool
+    .filter((ion) => ids.includes(ion.id))
+    .map((ion, i) => ({ ...ion, color: colors[i % colors.length], type }));
+}
+
+export const buildCations = (ids) => buildIonSet(CATIONS, ids, CATION_COLORS, 'cation');
+export const buildAnions = (ids) => buildIonSet(ANIONS, ids, ANION_COLORS, 'anion');
 
 export function pickSubset(pool, count, rng = Math.random) {
   const byCharge = {};

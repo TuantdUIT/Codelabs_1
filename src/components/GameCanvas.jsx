@@ -1,28 +1,23 @@
 import { useEffect, useRef } from 'react';
 import { GameEngine } from '../game/engine.js';
 import { drawFrame } from '../game/render.js';
+import { WIDTH, HEIGHT, CANNON_X, CANNON_Y } from '../game/grid.js';
 
-const WIDTH = 900;
-const HEIGHT = 520;
-
-export default function GameCanvas({ onEvent, engineRef }) {
+export default function GameCanvas({ onEvent, engineRef, setup }) {
   const canvasRef = useRef(null);
-  const aimRef = useRef(null);
   const rafRef = useRef(null);
 
   useEffect(() => {
-    const engine = new GameEngine({ width: WIDTH, height: HEIGHT, onEvent });
+    const engine = new GameEngine({ onEvent, ...setup });
+    engine.setAim(CANNON_X, CANNON_Y - 200);
     engineRef.current = engine;
 
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-
+    const ctx = canvasRef.current.getContext('2d');
     let last = performance.now();
     const loop = (now) => {
-      const dt = now - last;
+      engine.update(now - last);
       last = now;
-      engine.update(dt);
-      drawFrame(ctx, engine, aimRef.current);
+      drawFrame(ctx, engine);
       rafRef.current = requestAnimationFrame(loop);
     };
     rafRef.current = requestAnimationFrame(loop);
@@ -33,24 +28,23 @@ export default function GameCanvas({ onEvent, engineRef }) {
 
   const getPos = (e) => {
     const rect = canvasRef.current.getBoundingClientRect();
-    const scaleX = WIDTH / rect.width;
-    const scaleY = HEIGHT / rect.height;
     return {
-      x: (e.clientX - rect.left) * scaleX,
-      y: (e.clientY - rect.top) * scaleY,
+      x: ((e.clientX - rect.left) * WIDTH) / rect.width,
+      y: ((e.clientY - rect.top) * HEIGHT) / rect.height,
     };
   };
 
   const handleMove = (e) => {
-    aimRef.current = getPos(e);
+    const pos = getPos(e);
+    engineRef.current?.setAim(pos.x, pos.y);
   };
 
-  const handleClick = (e) => {
+  const handleDown = (e) => {
     const pos = getPos(e);
     const engine = engineRef.current;
     if (!engine) return;
-    const bubble = engine.hitTest(pos.x, pos.y);
-    if (bubble) engine.shootAt(bubble.id);
+    engine.setAim(pos.x, pos.y);
+    engine.fire();
   };
 
   return (
@@ -59,8 +53,8 @@ export default function GameCanvas({ onEvent, engineRef }) {
       width={WIDTH}
       height={HEIGHT}
       className="game-canvas"
-      onMouseMove={handleMove}
-      onClick={handleClick}
+      onPointerMove={handleMove}
+      onPointerDown={handleDown}
     />
   );
 }

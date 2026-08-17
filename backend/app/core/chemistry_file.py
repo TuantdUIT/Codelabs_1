@@ -7,11 +7,15 @@ lan `organic` (dong phan) deu can, ma hai module do khong duoc biet nhau.
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Any
 
-# backend/app/core/chemistry_file.py -> len 3 cap la goc repo
-CHEMISTRY_JSON = Path(__file__).resolve().parents[3] / "shared" / "chemistry.json"
+# Mac dinh: backend/app/core/chemistry_file.py -> len 3 cap la goc repo.
+# Trong container thi cay thu muc khac nen dat bien CHEMISTRY_JSON de tro thang.
+CHEMISTRY_JSON = Path(
+    os.getenv("CHEMISTRY_JSON") or Path(__file__).resolve().parents[3] / "shared" / "chemistry.json"
+)
 
 
 def load_chemistry(path: Path | None = None) -> dict[str, Any]:

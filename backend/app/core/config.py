@@ -1,6 +1,7 @@
 """Cau hinh toan he thong, doc tu backend/.env."""
 
 from functools import lru_cache
+from urllib.parse import urlparse
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -54,8 +55,16 @@ class Settings(BaseSettings):
 
     @property
     def refresh_cookie_path(self) -> str:
-        """Cookie chi gui kem cho cac endpoint /auth/*, khong lo ra toan site."""
-        return "/auth"
+        """Cookie chi gui kem cho cac endpoint /auth/*, khong lo ra toan site.
+
+        Suy ra tu duong dan cua BACKEND_URL de chay dung ca khi backend nam sau
+        reverse proxy o mot tien to khac. Vi du production dat
+        BACKEND_URL=https://ten-mien/api thi cookie phai co path=/api/auth, neu
+        de cung `/auth` thi trinh duyet se KHONG gui cookie toi /api/auth/refresh
+        va nguoi choi bi dang xuat sau moi lan tai trang.
+        """
+        prefix = urlparse(self.BACKEND_URL).path.rstrip("/")
+        return f"{prefix}/auth"
 
 
 @lru_cache

@@ -1,0 +1,1947 @@
+{
+  "generated_at": "2026-08-17T08:11:34.355Z",
+  "source": "frontend/src/feature — sinh bằng npm run export:chemistry, đừng sửa tay",
+  "ions": [
+    {
+      "id": "Na",
+      "type": "cation",
+      "symbol": "Na",
+      "charge": 1,
+      "name": "Natri",
+      "polyatomic": false,
+      "acid_name": null
+    },
+    {
+      "id": "K",
+      "type": "cation",
+      "symbol": "K",
+      "charge": 1,
+      "name": "Kali",
+      "polyatomic": false,
+      "acid_name": null
+    },
+    {
+      "id": "H",
+      "type": "cation",
+      "symbol": "H",
+      "charge": 1,
+      "name": "Hiđro",
+      "polyatomic": false,
+      "acid_name": null
+    },
+    {
+      "id": "Ag",
+      "type": "cation",
+      "symbol": "Ag",
+      "charge": 1,
+      "name": "Bạc",
+      "polyatomic": false,
+      "acid_name": null
+    },
+    {
+      "id": "NH4",
+      "type": "cation",
+      "symbol": "NH4",
+      "charge": 1,
+      "name": "Amoni",
+      "polyatomic": true,
+      "acid_name": null
+    },
+    {
+      "id": "Ca",
+      "type": "cation",
+      "symbol": "Ca",
+      "charge": 2,
+      "name": "Canxi",
+      "polyatomic": false,
+      "acid_name": null
+    },
+    {
+      "id": "Mg",
+      "type": "cation",
+      "symbol": "Mg",
+      "charge": 2,
+      "name": "Magie",
+      "polyatomic": false,
+      "acid_name": null
+    },
+    {
+      "id": "Ba",
+      "type": "cation",
+      "symbol": "Ba",
+      "charge": 2,
+      "name": "Bari",
+      "polyatomic": false,
+      "acid_name": null
+    },
+    {
+      "id": "Zn",
+      "type": "cation",
+      "symbol": "Zn",
+      "charge": 2,
+      "name": "Kẽm",
+      "polyatomic": false,
+      "acid_name": null
+    },
+    {
+      "id": "Cu",
+      "type": "cation",
+      "symbol": "Cu",
+      "charge": 2,
+      "name": "Đồng(II)",
+      "polyatomic": false,
+      "acid_name": null
+    },
+    {
+      "id": "Fe2",
+      "type": "cation",
+      "symbol": "Fe",
+      "charge": 2,
+      "name": "Sắt(II)",
+      "polyatomic": false,
+      "acid_name": null
+    },
+    {
+      "id": "Al",
+      "type": "cation",
+      "symbol": "Al",
+      "charge": 3,
+      "name": "Nhôm",
+      "polyatomic": false,
+      "acid_name": null
+    },
+    {
+      "id": "Fe3",
+      "type": "cation",
+      "symbol": "Fe",
+      "charge": 3,
+      "name": "Sắt(III)",
+      "polyatomic": false,
+      "acid_name": null
+    },
+    {
+      "id": "Cl",
+      "type": "anion",
+      "symbol": "Cl",
+      "charge": 1,
+      "name": "Clorua",
+      "polyatomic": false,
+      "acid_name": "Axit clohiđric"
+    },
+    {
+      "id": "Br",
+      "type": "anion",
+      "symbol": "Br",
+      "charge": 1,
+      "name": "Bromua",
+      "polyatomic": false,
+      "acid_name": "Axit bromhiđric"
+    },
+    {
+      "id": "NO3",
+      "type": "anion",
+      "symbol": "NO3",
+      "charge": 1,
+      "name": "Nitrat",
+      "polyatomic": true,
+      "acid_name": "Axit nitric"
+    },
+    {
+      "id": "OH",
+      "type": "anion",
+      "symbol": "OH",
+      "charge": 1,
+      "name": "Hiđroxit",
+      "polyatomic": true,
+      "acid_name": null
+    },
+    {
+      "id": "O",
+      "type": "anion",
+      "symbol": "O",
+      "charge": 2,
+      "name": "Oxit",
+      "polyatomic": false,
+      "acid_name": null
+    },
+    {
+      "id": "S",
+      "type": "anion",
+      "symbol": "S",
+      "charge": 2,
+      "name": "Sunfua",
+      "polyatomic": false,
+      "acid_name": "Axit sunfuhiđric"
+    },
+    {
+      "id": "SO4",
+      "type": "anion",
+      "symbol": "SO4",
+      "charge": 2,
+      "name": "Sunfat",
+      "polyatomic": true,
+      "acid_name": "Axit sunfuric"
+    },
+    {
+      "id": "CO3",
+      "type": "anion",
+      "symbol": "CO3",
+      "charge": 2,
+      "name": "Cacbonat",
+      "polyatomic": true,
+      "acid_name": "Axit cacbonic"
+    },
+    {
+      "id": "SO3",
+      "type": "anion",
+      "symbol": "SO3",
+      "charge": 2,
+      "name": "Sunfit",
+      "polyatomic": true,
+      "acid_name": "Axit sunfurơ"
+    },
+    {
+      "id": "PO4",
+      "type": "anion",
+      "symbol": "PO4",
+      "charge": 3,
+      "name": "Photphat",
+      "polyatomic": true,
+      "acid_name": "Axit photphoric"
+    }
+  ],
+  "compounds": [
+    {
+      "cation_id": "Na",
+      "anion_id": "Cl",
+      "formula": "NaCl",
+      "name": "Natri clorua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Na",
+      "anion_id": "Br",
+      "formula": "NaBr",
+      "name": "Natri bromua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Na",
+      "anion_id": "NO3",
+      "formula": "NaNO₃",
+      "name": "Natri nitrat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Na",
+      "anion_id": "OH",
+      "formula": "NaOH",
+      "name": "Natri hiđroxit",
+      "type": "base",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Na",
+      "anion_id": "O",
+      "formula": "Na₂O",
+      "name": "Natri oxit",
+      "type": "oxit",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "Na",
+      "anion_id": "S",
+      "formula": "Na₂S",
+      "name": "Natri sunfua",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "Na",
+      "anion_id": "SO4",
+      "formula": "Na₂SO₄",
+      "name": "Natri sunfat",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "Na",
+      "anion_id": "CO3",
+      "formula": "Na₂CO₃",
+      "name": "Natri cacbonat",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "Na",
+      "anion_id": "SO3",
+      "formula": "Na₂SO₃",
+      "name": "Natri sunfit",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "Na",
+      "anion_id": "PO4",
+      "formula": "Na₃PO₄",
+      "name": "Natri photphat",
+      "type": "muoi",
+      "cat_sub": 3,
+      "an_sub": 1,
+      "total": 4
+    },
+    {
+      "cation_id": "K",
+      "anion_id": "Cl",
+      "formula": "KCl",
+      "name": "Kali clorua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "K",
+      "anion_id": "Br",
+      "formula": "KBr",
+      "name": "Kali bromua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "K",
+      "anion_id": "NO3",
+      "formula": "KNO₃",
+      "name": "Kali nitrat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "K",
+      "anion_id": "OH",
+      "formula": "KOH",
+      "name": "Kali hiđroxit",
+      "type": "base",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "K",
+      "anion_id": "O",
+      "formula": "K₂O",
+      "name": "Kali oxit",
+      "type": "oxit",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "K",
+      "anion_id": "S",
+      "formula": "K₂S",
+      "name": "Kali sunfua",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "K",
+      "anion_id": "SO4",
+      "formula": "K₂SO₄",
+      "name": "Kali sunfat",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "K",
+      "anion_id": "CO3",
+      "formula": "K₂CO₃",
+      "name": "Kali cacbonat",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "K",
+      "anion_id": "SO3",
+      "formula": "K₂SO₃",
+      "name": "Kali sunfit",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "K",
+      "anion_id": "PO4",
+      "formula": "K₃PO₄",
+      "name": "Kali photphat",
+      "type": "muoi",
+      "cat_sub": 3,
+      "an_sub": 1,
+      "total": 4
+    },
+    {
+      "cation_id": "H",
+      "anion_id": "Cl",
+      "formula": "HCl",
+      "name": "Axit clohiđric",
+      "type": "axit",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "H",
+      "anion_id": "Br",
+      "formula": "HBr",
+      "name": "Axit bromhiđric",
+      "type": "axit",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "H",
+      "anion_id": "NO3",
+      "formula": "HNO₃",
+      "name": "Axit nitric",
+      "type": "axit",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "H",
+      "anion_id": "O",
+      "formula": "H₂O",
+      "name": "Nước",
+      "type": "oxit",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "H",
+      "anion_id": "S",
+      "formula": "H₂S",
+      "name": "Axit sunfuhiđric",
+      "type": "axit",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "H",
+      "anion_id": "SO4",
+      "formula": "H₂SO₄",
+      "name": "Axit sunfuric",
+      "type": "axit",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "H",
+      "anion_id": "CO3",
+      "formula": "H₂CO₃",
+      "name": "Axit cacbonic",
+      "type": "axit",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "H",
+      "anion_id": "SO3",
+      "formula": "H₂SO₃",
+      "name": "Axit sunfurơ",
+      "type": "axit",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "H",
+      "anion_id": "PO4",
+      "formula": "H₃PO₄",
+      "name": "Axit photphoric",
+      "type": "axit",
+      "cat_sub": 3,
+      "an_sub": 1,
+      "total": 4
+    },
+    {
+      "cation_id": "Ag",
+      "anion_id": "Cl",
+      "formula": "AgCl",
+      "name": "Bạc clorua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Ag",
+      "anion_id": "Br",
+      "formula": "AgBr",
+      "name": "Bạc bromua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Ag",
+      "anion_id": "NO3",
+      "formula": "AgNO₃",
+      "name": "Bạc nitrat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Ag",
+      "anion_id": "OH",
+      "formula": "AgOH",
+      "name": "Bạc hiđroxit",
+      "type": "base",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Ag",
+      "anion_id": "O",
+      "formula": "Ag₂O",
+      "name": "Bạc oxit",
+      "type": "oxit",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "Ag",
+      "anion_id": "S",
+      "formula": "Ag₂S",
+      "name": "Bạc sunfua",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "Ag",
+      "anion_id": "SO4",
+      "formula": "Ag₂SO₄",
+      "name": "Bạc sunfat",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "Ag",
+      "anion_id": "CO3",
+      "formula": "Ag₂CO₃",
+      "name": "Bạc cacbonat",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "Ag",
+      "anion_id": "SO3",
+      "formula": "Ag₂SO₃",
+      "name": "Bạc sunfit",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "Ag",
+      "anion_id": "PO4",
+      "formula": "Ag₃PO₄",
+      "name": "Bạc photphat",
+      "type": "muoi",
+      "cat_sub": 3,
+      "an_sub": 1,
+      "total": 4
+    },
+    {
+      "cation_id": "NH4",
+      "anion_id": "Cl",
+      "formula": "NH₄Cl",
+      "name": "Amoni clorua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "NH4",
+      "anion_id": "Br",
+      "formula": "NH₄Br",
+      "name": "Amoni bromua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "NH4",
+      "anion_id": "NO3",
+      "formula": "NH₄NO₃",
+      "name": "Amoni nitrat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "NH4",
+      "anion_id": "OH",
+      "formula": "NH₄OH",
+      "name": "Amoni hiđroxit",
+      "type": "base",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "NH4",
+      "anion_id": "S",
+      "formula": "(NH₄)₂S",
+      "name": "Amoni sunfua",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "NH4",
+      "anion_id": "SO4",
+      "formula": "(NH₄)₂SO₄",
+      "name": "Amoni sunfat",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "NH4",
+      "anion_id": "CO3",
+      "formula": "(NH₄)₂CO₃",
+      "name": "Amoni cacbonat",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "NH4",
+      "anion_id": "SO3",
+      "formula": "(NH₄)₂SO₃",
+      "name": "Amoni sunfit",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 1,
+      "total": 3
+    },
+    {
+      "cation_id": "NH4",
+      "anion_id": "PO4",
+      "formula": "(NH₄)₃PO₄",
+      "name": "Amoni photphat",
+      "type": "muoi",
+      "cat_sub": 3,
+      "an_sub": 1,
+      "total": 4
+    },
+    {
+      "cation_id": "Ca",
+      "anion_id": "Cl",
+      "formula": "CaCl₂",
+      "name": "Canxi clorua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Ca",
+      "anion_id": "Br",
+      "formula": "CaBr₂",
+      "name": "Canxi bromua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Ca",
+      "anion_id": "NO3",
+      "formula": "Ca(NO₃)₂",
+      "name": "Canxi nitrat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Ca",
+      "anion_id": "OH",
+      "formula": "Ca(OH)₂",
+      "name": "Canxi hiđroxit",
+      "type": "base",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Ca",
+      "anion_id": "O",
+      "formula": "CaO",
+      "name": "Canxi oxit",
+      "type": "oxit",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Ca",
+      "anion_id": "S",
+      "formula": "CaS",
+      "name": "Canxi sunfua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Ca",
+      "anion_id": "SO4",
+      "formula": "CaSO₄",
+      "name": "Canxi sunfat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Ca",
+      "anion_id": "CO3",
+      "formula": "CaCO₃",
+      "name": "Canxi cacbonat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Ca",
+      "anion_id": "SO3",
+      "formula": "CaSO₃",
+      "name": "Canxi sunfit",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Ca",
+      "anion_id": "PO4",
+      "formula": "Ca₃(PO₄)₂",
+      "name": "Canxi photphat",
+      "type": "muoi",
+      "cat_sub": 3,
+      "an_sub": 2,
+      "total": 5
+    },
+    {
+      "cation_id": "Mg",
+      "anion_id": "Cl",
+      "formula": "MgCl₂",
+      "name": "Magie clorua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Mg",
+      "anion_id": "Br",
+      "formula": "MgBr₂",
+      "name": "Magie bromua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Mg",
+      "anion_id": "NO3",
+      "formula": "Mg(NO₃)₂",
+      "name": "Magie nitrat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Mg",
+      "anion_id": "OH",
+      "formula": "Mg(OH)₂",
+      "name": "Magie hiđroxit",
+      "type": "base",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Mg",
+      "anion_id": "O",
+      "formula": "MgO",
+      "name": "Magie oxit",
+      "type": "oxit",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Mg",
+      "anion_id": "S",
+      "formula": "MgS",
+      "name": "Magie sunfua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Mg",
+      "anion_id": "SO4",
+      "formula": "MgSO₄",
+      "name": "Magie sunfat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Mg",
+      "anion_id": "CO3",
+      "formula": "MgCO₃",
+      "name": "Magie cacbonat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Mg",
+      "anion_id": "SO3",
+      "formula": "MgSO₃",
+      "name": "Magie sunfit",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Mg",
+      "anion_id": "PO4",
+      "formula": "Mg₃(PO₄)₂",
+      "name": "Magie photphat",
+      "type": "muoi",
+      "cat_sub": 3,
+      "an_sub": 2,
+      "total": 5
+    },
+    {
+      "cation_id": "Ba",
+      "anion_id": "Cl",
+      "formula": "BaCl₂",
+      "name": "Bari clorua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Ba",
+      "anion_id": "Br",
+      "formula": "BaBr₂",
+      "name": "Bari bromua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Ba",
+      "anion_id": "NO3",
+      "formula": "Ba(NO₃)₂",
+      "name": "Bari nitrat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Ba",
+      "anion_id": "OH",
+      "formula": "Ba(OH)₂",
+      "name": "Bari hiđroxit",
+      "type": "base",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Ba",
+      "anion_id": "O",
+      "formula": "BaO",
+      "name": "Bari oxit",
+      "type": "oxit",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Ba",
+      "anion_id": "S",
+      "formula": "BaS",
+      "name": "Bari sunfua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Ba",
+      "anion_id": "SO4",
+      "formula": "BaSO₄",
+      "name": "Bari sunfat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Ba",
+      "anion_id": "CO3",
+      "formula": "BaCO₃",
+      "name": "Bari cacbonat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Ba",
+      "anion_id": "SO3",
+      "formula": "BaSO₃",
+      "name": "Bari sunfit",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Ba",
+      "anion_id": "PO4",
+      "formula": "Ba₃(PO₄)₂",
+      "name": "Bari photphat",
+      "type": "muoi",
+      "cat_sub": 3,
+      "an_sub": 2,
+      "total": 5
+    },
+    {
+      "cation_id": "Zn",
+      "anion_id": "Cl",
+      "formula": "ZnCl₂",
+      "name": "Kẽm clorua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Zn",
+      "anion_id": "Br",
+      "formula": "ZnBr₂",
+      "name": "Kẽm bromua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Zn",
+      "anion_id": "NO3",
+      "formula": "Zn(NO₃)₂",
+      "name": "Kẽm nitrat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Zn",
+      "anion_id": "OH",
+      "formula": "Zn(OH)₂",
+      "name": "Kẽm hiđroxit",
+      "type": "base",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Zn",
+      "anion_id": "O",
+      "formula": "ZnO",
+      "name": "Kẽm oxit",
+      "type": "oxit",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Zn",
+      "anion_id": "S",
+      "formula": "ZnS",
+      "name": "Kẽm sunfua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Zn",
+      "anion_id": "SO4",
+      "formula": "ZnSO₄",
+      "name": "Kẽm sunfat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Zn",
+      "anion_id": "CO3",
+      "formula": "ZnCO₃",
+      "name": "Kẽm cacbonat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Zn",
+      "anion_id": "SO3",
+      "formula": "ZnSO₃",
+      "name": "Kẽm sunfit",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Zn",
+      "anion_id": "PO4",
+      "formula": "Zn₃(PO₄)₂",
+      "name": "Kẽm photphat",
+      "type": "muoi",
+      "cat_sub": 3,
+      "an_sub": 2,
+      "total": 5
+    },
+    {
+      "cation_id": "Cu",
+      "anion_id": "Cl",
+      "formula": "CuCl₂",
+      "name": "Đồng(II) clorua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Cu",
+      "anion_id": "Br",
+      "formula": "CuBr₂",
+      "name": "Đồng(II) bromua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Cu",
+      "anion_id": "NO3",
+      "formula": "Cu(NO₃)₂",
+      "name": "Đồng(II) nitrat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Cu",
+      "anion_id": "OH",
+      "formula": "Cu(OH)₂",
+      "name": "Đồng(II) hiđroxit",
+      "type": "base",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Cu",
+      "anion_id": "O",
+      "formula": "CuO",
+      "name": "Đồng(II) oxit",
+      "type": "oxit",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Cu",
+      "anion_id": "S",
+      "formula": "CuS",
+      "name": "Đồng(II) sunfua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Cu",
+      "anion_id": "SO4",
+      "formula": "CuSO₄",
+      "name": "Đồng(II) sunfat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Cu",
+      "anion_id": "CO3",
+      "formula": "CuCO₃",
+      "name": "Đồng(II) cacbonat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Cu",
+      "anion_id": "SO3",
+      "formula": "CuSO₃",
+      "name": "Đồng(II) sunfit",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Cu",
+      "anion_id": "PO4",
+      "formula": "Cu₃(PO₄)₂",
+      "name": "Đồng(II) photphat",
+      "type": "muoi",
+      "cat_sub": 3,
+      "an_sub": 2,
+      "total": 5
+    },
+    {
+      "cation_id": "Fe2",
+      "anion_id": "Cl",
+      "formula": "FeCl₂",
+      "name": "Sắt(II) clorua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Fe2",
+      "anion_id": "Br",
+      "formula": "FeBr₂",
+      "name": "Sắt(II) bromua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Fe2",
+      "anion_id": "NO3",
+      "formula": "Fe(NO₃)₂",
+      "name": "Sắt(II) nitrat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Fe2",
+      "anion_id": "OH",
+      "formula": "Fe(OH)₂",
+      "name": "Sắt(II) hiđroxit",
+      "type": "base",
+      "cat_sub": 1,
+      "an_sub": 2,
+      "total": 3
+    },
+    {
+      "cation_id": "Fe2",
+      "anion_id": "O",
+      "formula": "FeO",
+      "name": "Sắt(II) oxit",
+      "type": "oxit",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Fe2",
+      "anion_id": "S",
+      "formula": "FeS",
+      "name": "Sắt(II) sunfua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Fe2",
+      "anion_id": "SO4",
+      "formula": "FeSO₄",
+      "name": "Sắt(II) sunfat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Fe2",
+      "anion_id": "CO3",
+      "formula": "FeCO₃",
+      "name": "Sắt(II) cacbonat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Fe2",
+      "anion_id": "SO3",
+      "formula": "FeSO₃",
+      "name": "Sắt(II) sunfit",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Fe2",
+      "anion_id": "PO4",
+      "formula": "Fe₃(PO₄)₂",
+      "name": "Sắt(II) photphat",
+      "type": "muoi",
+      "cat_sub": 3,
+      "an_sub": 2,
+      "total": 5
+    },
+    {
+      "cation_id": "Al",
+      "anion_id": "Cl",
+      "formula": "AlCl₃",
+      "name": "Nhôm clorua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 3,
+      "total": 4
+    },
+    {
+      "cation_id": "Al",
+      "anion_id": "Br",
+      "formula": "AlBr₃",
+      "name": "Nhôm bromua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 3,
+      "total": 4
+    },
+    {
+      "cation_id": "Al",
+      "anion_id": "NO3",
+      "formula": "Al(NO₃)₃",
+      "name": "Nhôm nitrat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 3,
+      "total": 4
+    },
+    {
+      "cation_id": "Al",
+      "anion_id": "OH",
+      "formula": "Al(OH)₃",
+      "name": "Nhôm hiđroxit",
+      "type": "base",
+      "cat_sub": 1,
+      "an_sub": 3,
+      "total": 4
+    },
+    {
+      "cation_id": "Al",
+      "anion_id": "O",
+      "formula": "Al₂O₃",
+      "name": "Nhôm oxit",
+      "type": "oxit",
+      "cat_sub": 2,
+      "an_sub": 3,
+      "total": 5
+    },
+    {
+      "cation_id": "Al",
+      "anion_id": "S",
+      "formula": "Al₂S₃",
+      "name": "Nhôm sunfua",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 3,
+      "total": 5
+    },
+    {
+      "cation_id": "Al",
+      "anion_id": "SO4",
+      "formula": "Al₂(SO₄)₃",
+      "name": "Nhôm sunfat",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 3,
+      "total": 5
+    },
+    {
+      "cation_id": "Al",
+      "anion_id": "CO3",
+      "formula": "Al₂(CO₃)₃",
+      "name": "Nhôm cacbonat",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 3,
+      "total": 5
+    },
+    {
+      "cation_id": "Al",
+      "anion_id": "SO3",
+      "formula": "Al₂(SO₃)₃",
+      "name": "Nhôm sunfit",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 3,
+      "total": 5
+    },
+    {
+      "cation_id": "Al",
+      "anion_id": "PO4",
+      "formula": "AlPO₄",
+      "name": "Nhôm photphat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    },
+    {
+      "cation_id": "Fe3",
+      "anion_id": "Cl",
+      "formula": "FeCl₃",
+      "name": "Sắt(III) clorua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 3,
+      "total": 4
+    },
+    {
+      "cation_id": "Fe3",
+      "anion_id": "Br",
+      "formula": "FeBr₃",
+      "name": "Sắt(III) bromua",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 3,
+      "total": 4
+    },
+    {
+      "cation_id": "Fe3",
+      "anion_id": "NO3",
+      "formula": "Fe(NO₃)₃",
+      "name": "Sắt(III) nitrat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 3,
+      "total": 4
+    },
+    {
+      "cation_id": "Fe3",
+      "anion_id": "OH",
+      "formula": "Fe(OH)₃",
+      "name": "Sắt(III) hiđroxit",
+      "type": "base",
+      "cat_sub": 1,
+      "an_sub": 3,
+      "total": 4
+    },
+    {
+      "cation_id": "Fe3",
+      "anion_id": "O",
+      "formula": "Fe₂O₃",
+      "name": "Sắt(III) oxit",
+      "type": "oxit",
+      "cat_sub": 2,
+      "an_sub": 3,
+      "total": 5
+    },
+    {
+      "cation_id": "Fe3",
+      "anion_id": "S",
+      "formula": "Fe₂S₃",
+      "name": "Sắt(III) sunfua",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 3,
+      "total": 5
+    },
+    {
+      "cation_id": "Fe3",
+      "anion_id": "SO4",
+      "formula": "Fe₂(SO₄)₃",
+      "name": "Sắt(III) sunfat",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 3,
+      "total": 5
+    },
+    {
+      "cation_id": "Fe3",
+      "anion_id": "CO3",
+      "formula": "Fe₂(CO₃)₃",
+      "name": "Sắt(III) cacbonat",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 3,
+      "total": 5
+    },
+    {
+      "cation_id": "Fe3",
+      "anion_id": "SO3",
+      "formula": "Fe₂(SO₃)₃",
+      "name": "Sắt(III) sunfit",
+      "type": "muoi",
+      "cat_sub": 2,
+      "an_sub": 3,
+      "total": 5
+    },
+    {
+      "cation_id": "Fe3",
+      "anion_id": "PO4",
+      "formula": "FePO₄",
+      "name": "Sắt(III) photphat",
+      "type": "muoi",
+      "cat_sub": 1,
+      "an_sub": 1,
+      "total": 2
+    }
+  ],
+  "isomers": [
+    {
+      "canonical_key": "()",
+      "carbons": 1,
+      "formula": "CH₄",
+      "iupac_name": "metan"
+    },
+    {
+      "canonical_key": "(())",
+      "carbons": 2,
+      "formula": "C₂H₆",
+      "iupac_name": "etan"
+    },
+    {
+      "canonical_key": "(()())",
+      "carbons": 3,
+      "formula": "C₃H₈",
+      "iupac_name": "propan"
+    },
+    {
+      "canonical_key": "(()()())",
+      "carbons": 4,
+      "formula": "C₄H₁₀",
+      "iupac_name": "2-metylpropan"
+    },
+    {
+      "canonical_key": "((())())",
+      "carbons": 4,
+      "formula": "C₄H₁₀",
+      "iupac_name": "n-butan"
+    },
+    {
+      "canonical_key": "((()())())",
+      "carbons": 5,
+      "formula": "C₅H₁₂",
+      "iupac_name": "2-metylbutan"
+    },
+    {
+      "canonical_key": "(()()()())",
+      "carbons": 5,
+      "formula": "C₅H₁₂",
+      "iupac_name": "2,2-đimetylpropan"
+    },
+    {
+      "canonical_key": "((())(()))",
+      "carbons": 5,
+      "formula": "C₅H₁₂",
+      "iupac_name": "n-pentan"
+    },
+    {
+      "canonical_key": "((()())(()))",
+      "carbons": 6,
+      "formula": "C₆H₁₄",
+      "iupac_name": "2-metylpentan"
+    },
+    {
+      "canonical_key": "((()()())())",
+      "carbons": 6,
+      "formula": "C₆H₁₄",
+      "iupac_name": "2,2-đimetylbutan"
+    },
+    {
+      "canonical_key": "((()())()())",
+      "carbons": 6,
+      "formula": "C₆H₁₄",
+      "iupac_name": "2,3-đimetylbutan"
+    },
+    {
+      "canonical_key": "((())(())())",
+      "carbons": 6,
+      "formula": "C₆H₁₄",
+      "iupac_name": "3-metylpentan"
+    },
+    {
+      "canonical_key": "(((()))(()))",
+      "carbons": 6,
+      "formula": "C₆H₁₄",
+      "iupac_name": "n-hexan"
+    },
+    {
+      "canonical_key": "(((()()))(()))",
+      "carbons": 7,
+      "formula": "C₇H₁₆",
+      "iupac_name": "2-metylhexan"
+    },
+    {
+      "canonical_key": "((()()())(()))",
+      "carbons": 7,
+      "formula": "C₇H₁₆",
+      "iupac_name": "2,2-đimetylpentan"
+    },
+    {
+      "canonical_key": "((()()())()())",
+      "carbons": 7,
+      "formula": "C₇H₁₆",
+      "iupac_name": "2,2,3-trimetylbutan"
+    },
+    {
+      "canonical_key": "((()())(())())",
+      "carbons": 7,
+      "formula": "C₇H₁₆",
+      "iupac_name": "2,3-đimetylpentan"
+    },
+    {
+      "canonical_key": "((()())(()()))",
+      "carbons": 7,
+      "formula": "C₇H₁₆",
+      "iupac_name": "2,4-đimetylpentan"
+    },
+    {
+      "canonical_key": "((())(())(()))",
+      "carbons": 7,
+      "formula": "C₇H₁₆",
+      "iupac_name": "3-etylpentan"
+    },
+    {
+      "canonical_key": "(((())())(()))",
+      "carbons": 7,
+      "formula": "C₇H₁₆",
+      "iupac_name": "3-metylhexan"
+    },
+    {
+      "canonical_key": "((())(())()())",
+      "carbons": 7,
+      "formula": "C₇H₁₆",
+      "iupac_name": "3,3-đimetylpentan"
+    },
+    {
+      "canonical_key": "(((()))((())))",
+      "carbons": 7,
+      "formula": "C₇H₁₆",
+      "iupac_name": "n-heptan"
+    },
+    {
+      "canonical_key": "(((()()))((())))",
+      "carbons": 8,
+      "formula": "C₈H₁₈",
+      "iupac_name": "2-metylheptan"
+    },
+    {
+      "canonical_key": "(((()()()))(()))",
+      "carbons": 8,
+      "formula": "C₈H₁₈",
+      "iupac_name": "2,2-đimetylhexan"
+    },
+    {
+      "canonical_key": "((()()())(())())",
+      "carbons": 8,
+      "formula": "C₈H₁₈",
+      "iupac_name": "2,2,3-trimetylpentan"
+    },
+    {
+      "canonical_key": "((()()())()()())",
+      "carbons": 8,
+      "formula": "C₈H₁₈",
+      "iupac_name": "2,2,3,3-tetrametylbutan"
+    },
+    {
+      "canonical_key": "((()()())(()()))",
+      "carbons": 8,
+      "formula": "C₈H₁₈",
+      "iupac_name": "2,2,4-trimetylpentan"
+    },
+    {
+      "canonical_key": "(((()())())(()))",
+      "carbons": 8,
+      "formula": "C₈H₁₈",
+      "iupac_name": "2,3-đimetylhexan"
+    },
+    {
+      "canonical_key": "((()())(())()())",
+      "carbons": 8,
+      "formula": "C₈H₁₈",
+      "iupac_name": "2,3,3-trimetylpentan"
+    },
+    {
+      "canonical_key": "((()())(()())())",
+      "carbons": 8,
+      "formula": "C₈H₁₈",
+      "iupac_name": "2,3,4-trimetylpentan"
+    },
+    {
+      "canonical_key": "(((()()))(())())",
+      "carbons": 8,
+      "formula": "C₈H₁₈",
+      "iupac_name": "2,4-đimetylhexan"
+    },
+    {
+      "canonical_key": "(((()()))(()()))",
+      "carbons": 8,
+      "formula": "C₈H₁₈",
+      "iupac_name": "2,5-đimetylhexan"
+    },
+    {
+      "canonical_key": "((()())(())(()))",
+      "carbons": 8,
+      "formula": "C₈H₁₈",
+      "iupac_name": "3-etyl-2-metylpentan"
+    },
+    {
+      "canonical_key": "((())(())(())())",
+      "carbons": 8,
+      "formula": "C₈H₁₈",
+      "iupac_name": "3-etyl-3-metylpentan"
+    },
+    {
+      "canonical_key": "(((())(()))(()))",
+      "carbons": 8,
+      "formula": "C₈H₁₈",
+      "iupac_name": "3-etylhexan"
+    },
+    {
+      "canonical_key": "(((())())((())))",
+      "carbons": 8,
+      "formula": "C₈H₁₈",
+      "iupac_name": "3-metylheptan"
+    },
+    {
+      "canonical_key": "(((())()())(()))",
+      "carbons": 8,
+      "formula": "C₈H₁₈",
+      "iupac_name": "3,3-đimetylhexan"
+    },
+    {
+      "canonical_key": "(((())())(())())",
+      "carbons": 8,
+      "formula": "C₈H₁₈",
+      "iupac_name": "3,4-đimetylhexan"
+    },
+    {
+      "canonical_key": "(((()))((()))())",
+      "carbons": 8,
+      "formula": "C₈H₁₈",
+      "iupac_name": "4-metylheptan"
+    },
+    {
+      "canonical_key": "((((())))((())))",
+      "carbons": 8,
+      "formula": "C₈H₁₈",
+      "iupac_name": "n-octan"
+    },
+    {
+      "canonical_key": "((((()())))((())))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "2-metyloctan"
+    },
+    {
+      "canonical_key": "(((()()()))((())))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "2,2-đimetylheptan"
+    },
+    {
+      "canonical_key": "(((()()())())(()))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "2,2,3-trimetylhexan"
+    },
+    {
+      "canonical_key": "((()()())(())()())",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "2,2,3,3-tetrametylpentan"
+    },
+    {
+      "canonical_key": "((()()())(()())())",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "2,2,3,4-tetrametylpentan"
+    },
+    {
+      "canonical_key": "(((()()()))(())())",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "2,2,4-trimetylhexan"
+    },
+    {
+      "canonical_key": "((()()())(()()()))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "2,2,4,4-tetrametylpentan"
+    },
+    {
+      "canonical_key": "(((()()()))(()()))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "2,2,5-trimetylhexan"
+    },
+    {
+      "canonical_key": "(((()())())((())))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "2,3-đimetylheptan"
+    },
+    {
+      "canonical_key": "(((()())()())(()))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "2,3,3-trimetylhexan"
+    },
+    {
+      "canonical_key": "((()())(()())()())",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "2,3,3,4-tetrametylpentan"
+    },
+    {
+      "canonical_key": "(((()())())(())())",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "2,3,4-trimetylhexan"
+    },
+    {
+      "canonical_key": "(((()())())(()()))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "2,3,5-trimetylhexan"
+    },
+    {
+      "canonical_key": "(((()()))((()))())",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "2,4-đimetylheptan"
+    },
+    {
+      "canonical_key": "(((()()))(())()())",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "2,4,4-trimetylhexan"
+    },
+    {
+      "canonical_key": "(((()()))((())()))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "2,5-đimetylheptan"
+    },
+    {
+      "canonical_key": "(((()()))((()())))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "2,6-đimetylheptan"
+    },
+    {
+      "canonical_key": "(((()())(()))(()))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "3-etyl-2-metylhexan"
+    },
+    {
+      "canonical_key": "((()()())(())(()))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "3-etyl-2,2-đimetylpentan"
+    },
+    {
+      "canonical_key": "((()())(())(())())",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "3-etyl-2,3-đimetylpentan"
+    },
+    {
+      "canonical_key": "((()())(()())(()))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "3-etyl-2,4-đimetylpentan"
+    },
+    {
+      "canonical_key": "(((())(())())(()))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "3-etyl-3-metylhexan"
+    },
+    {
+      "canonical_key": "(((())(()))(())())",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "3-etyl-4-metylhexan"
+    },
+    {
+      "canonical_key": "(((())(()))((())))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "3-etylheptan"
+    },
+    {
+      "canonical_key": "((((())()))((())))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "3-metyloctan"
+    },
+    {
+      "canonical_key": "((())(())(())(()))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "3,3-đietylpentan"
+    },
+    {
+      "canonical_key": "(((())()())((())))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "3,3-đimetylheptan"
+    },
+    {
+      "canonical_key": "(((())()())(())())",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "3,3,4-trimetylhexan"
+    },
+    {
+      "canonical_key": "(((())())((()))())",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "3,4-đimetylheptan"
+    },
+    {
+      "canonical_key": "(((())())((())()))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "3,5-đimetylheptan"
+    },
+    {
+      "canonical_key": "(((()()))(())(()))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "4-etyl-2-metylhexan"
+    },
+    {
+      "canonical_key": "(((()))((()))(()))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "4-etylheptan"
+    },
+    {
+      "canonical_key": "((((()))())((())))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "4-metyloctan"
+    },
+    {
+      "canonical_key": "(((()))((()))()())",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "4,4-đimetylheptan"
+    },
+    {
+      "canonical_key": "((((())))(((()))))",
+      "carbons": 9,
+      "formula": "C₉H₂₀",
+      "iupac_name": "n-nonan"
+    }
+  ]
+}

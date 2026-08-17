@@ -44,3 +44,7 @@ htmlcov/
 
 # Docker: dữ liệu Postgres nếu ai đó đổi sang bind mount thay vì volume
 backend/docker/pgdata/
+
+# Biến môi trường production — chỉ tồn tại trên máy chủ, không bao giờ commit
+.env.production
+.env.production.local

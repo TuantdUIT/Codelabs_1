@@ -1,0 +1,71 @@
+# Toan bo he thong cho production: postgres + migrate + backend + web(nginx).
+#
+#   docker compose -f docker-compose.prod.yml --env-file .env.production up -d --build
+#
+# Chi mot cong duy nhat lo ra ngoai (web). Postgres va backend khong publish
+# cong nao — chung chi noi voi nhau qua network noi bo cua compose.
+
+name: chemgame-prod
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?thieu POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?thieu POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-chemgame}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # Chay mot lan roi thoat. Tach rieng khoi backend de khi chay nhieu ban sao
+  # backend, chung khong cung chay migration mot luc va giam len nhau.
+  migrate:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    restart: "no"
+    env_file: [.env.production]
+    command: sh -c "alembic upgrade head && python -m app.seed"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    restart: unless-stopped
+    env_file: [.env.production]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/health').status==200 else 1)\""]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+
+  web:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        # Cung origin voi trang web nen chi can duong dan tuong doi.
+        VITE_API_BASE_URL: /api
+    restart: unless-stopped
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+    name: chemgame_prod_postgres_data

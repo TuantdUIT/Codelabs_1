@@ -1,0 +1,28 @@
+# Build context la goc repo (de backend lay duoc shared/chemistry.json), nen
+# phai loai that ky — khong thi moi lan build phai gui vai GB sang daemon.
+
+.git
+.github
+**/node_modules
+**/.venv
+**/venv
+**/__pycache__
+**/*.py[cod]
+**/.pytest_cache
+**/.ruff_cache
+**/.mypy_cache
+**/.import_linter_cache
+**/*.egg-info
+**/dist
+**/.vite
+
+# Bi mat: KHONG bao gio dua vao image. Bien moi truong nap luc chay.
+**/.env
+**/.env.*
+!**/.env.example
+
+**/.vscode
+**/.idea
+**/.DS_Store
+*.md
+!README.md

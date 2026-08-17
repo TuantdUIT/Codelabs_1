@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+.vite
 *.local
 
 # Editor directories and files
@@ -27,3 +28,19 @@ dist-ssr
 .env
 .env.*
 !.env.example
+
+# Python (backend)
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.import_linter_cache/
+*.egg-info/
+.coverage
+htmlcov/
+
+# Docker: dữ liệu Postgres nếu ai đó đổi sang bind mount thay vì volume
+backend/docker/pgdata/

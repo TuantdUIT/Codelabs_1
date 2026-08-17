@@ -1,0 +1,122 @@
+[importlinter]
+root_package = app
+include_external_packages = True
+
+# ---------------------------------------------------------------- tang domain
+[importlinter:contract:domain-thuan-khiet]
+name = Tang domain khong duoc phu thuoc framework
+type = forbidden
+source_modules =
+    app.modules.auth.domain
+    app.modules.gameplay.domain
+    app.modules.inorganic.domain
+    app.modules.organic.domain
+forbidden_modules =
+    sqlalchemy
+    fastapi
+    starlette
+    pydantic
+    pydantic_settings
+    authlib
+    jwt
+
+# ----------------------------------------------------------- tang application
+[importlinter:contract:application-khong-cham-ha-tang]
+name = Tang application khong duoc import infrastructure hay framework web
+type = forbidden
+source_modules =
+    app.modules.auth.application
+    app.modules.gameplay.application
+    app.modules.inorganic.application
+forbidden_modules =
+    app.modules.auth.infrastructure
+    app.modules.auth.api
+    app.modules.gameplay.infrastructure
+    app.modules.gameplay.api
+    app.modules.inorganic.infrastructure
+    app.modules.inorganic.api
+    fastapi
+    starlette
+    sqlalchemy
+    authlib
+
+# --------------------------------------------------------- thu tu tang / module
+[importlinter:contract:tang-trong-module-auth]
+name = Thu tu tang trong module auth
+type = layers
+layers =
+    app.modules.auth.api
+    app.modules.auth.infrastructure
+    app.modules.auth.application
+    app.modules.auth.domain
+
+[importlinter:contract:tang-trong-module-gameplay]
+name = Thu tu tang trong module gameplay
+type = layers
+layers =
+    app.modules.gameplay.api
+    app.modules.gameplay.infrastructure
+    app.modules.gameplay.application
+    app.modules.gameplay.domain
+
+[importlinter:contract:tang-trong-module-inorganic]
+name = Thu tu tang trong module inorganic
+type = layers
+layers =
+    app.modules.inorganic.api
+    app.modules.inorganic.infrastructure
+    app.modules.inorganic.application
+    app.modules.inorganic.domain
+
+[importlinter:contract:tang-trong-module-organic]
+name = Thu tu tang trong module organic
+type = layers
+layers =
+    app.modules.organic.infrastructure
+    app.modules.organic.domain
+
+# ------------------------------------------------------ ranh gioi giua module
+# `app.container` la composition root — theo dinh nghia no biet moi module. Cac
+# chuoi import di qua no khong tinh la vi pham ranh gioi, nen duoc bo qua o day.
+[importlinter:contract:hai-che-do-choi-doc-lap]
+name = inorganic va organic khong duoc biet nhau
+type = independence
+modules =
+    app.modules.inorganic
+    app.modules.organic
+ignore_imports =
+    app.modules.*.api.* -> app.container
+
+[importlinter:contract:gameplay-khong-biet-che-do-choi]
+name = gameplay khong duoc phu thuoc module che do choi hay ruot cua auth
+type = forbidden
+source_modules =
+    app.modules.gameplay
+forbidden_modules =
+    app.modules.inorganic
+    app.modules.organic
+    app.modules.auth.application
+    app.modules.auth.infrastructure
+ignore_imports =
+    app.modules.*.api.* -> app.container
+
+[importlinter:contract:auth-doc-lap]
+name = auth khong duoc biet cac module nghiep vu khac
+type = forbidden
+source_modules =
+    app.modules.auth
+forbidden_modules =
+    app.modules.gameplay
+    app.modules.inorganic
+    app.modules.organic
+ignore_imports =
+    app.modules.*.api.* -> app.container
+
+[importlinter:contract:nen-khong-biet-module]
+name = core va shared khong duoc biet cac module nghiep vu
+type = forbidden
+source_modules =
+    app.core
+    app.shared
+forbidden_modules =
+    app.modules

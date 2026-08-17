@@ -1,0 +1,33 @@
+# Postgres RIENG cho game hoa hoc.
+#
+# Cong 5433 chu khong phai 5432: may nay dang chay nhieu stack Docker khac va
+# 5432 da thuoc ve project `voice-agent`. Moi project mot database server —
+# khong dung chung, khong phu thuoc vong doi compose cua nguoi khac.
+#
+# Chi bind 127.0.0.1 de DB khong lo ra mang LAN.
+
+name: chemgame
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: chemgame-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: chemgame
+      POSTGRES_PASSWORD: chemgame
+      POSTGRES_DB: chemgame
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - chemgame_postgres_data:/var/lib/postgresql/data
+      - ./docker/initdb:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U chemgame -d chemgame"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  chemgame_postgres_data:
+    name: chemgame_postgres_data

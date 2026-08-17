@@ -69,21 +69,45 @@ chính dài nhất, đánh số cho bộ chỉ số nhỏ nhất, rồi ghép t�
 
 # Chạy dự án
 
+Repo có hai phần nằm cùng cấp: `frontend/` (React + TypeScript, build bằng Vite)
+và `backend/` (FastAPI + PostgreSQL). Xem [backend/README.md](backend/README.md)
+cho phần máy chủ.
+
 ```bash
+cd frontend
 npm install
 npm run dev
-npm run build
+npm run build      # tsc && vite build
+npm run typecheck  # chỉ kiểm tra kiểu
 npm run lint
 ```
 
+Chơi được ngay mà không cần backend — chỉ là điểm không được lưu và không có
+bảng xếp hạng.
+
 ## Cấu trúc chính
 
-- `src/game/chemistry.js`: cân bằng điện tích, tạo và phân loại công thức vô cơ.
-- `src/game/engine.js`: lưới lục giác, đường đạn, phát hiện cụm hợp chất tự do, tính điểm và điều kiện thua.
-- `src/game/grid.js`: hình học sân chơi.
-- `src/game/render.js`: vẽ canvas.
-- `src/game/organic.js`: bộ khung ankan — dạng chuẩn của cây, liệt kê đồng phân, gọi tên IUPAC.
-- `src/game/organic-engine.js`: bàn ghép CH₃ (lưới vuông), luật đặt/gỡ, đồng hồ và chấm bài.
-- `src/game/organic-render.js`: vẽ canvas cho chế độ hữu cơ.
-- `src/components/`: giao diện React, chọn chế độ & ion, HUD, bảng ion, đề bài đồng phân, nhật ký.
-- `src/game/music.js`: nhạc nền Web Audio API (dùng chung cho cả hai chế độ).
+`frontend/src/feature/` chứa toàn bộ logic game (JavaScript thuần, không import React), tách theo hai chế độ chơi:
+
+```
+frontend/src/feature/
+├── in-organic/          chế độ vô cơ
+│   ├── ions.ts          bảng ion (điện tích, tên) và cách viết chỉ số trên/dưới
+│   ├── chemistry.ts     cân bằng điện tích, tạo và phân loại công thức vô cơ
+│   ├── grid.ts          hình học lưới lục giác
+│   ├── engine.ts        đường đạn, phát hiện cụm hợp chất tự do, điểm và điều kiện thua
+│   └── render.ts        vẽ canvas
+├── organic/             chế độ hữu cơ
+│   ├── organic.ts       bộ khung ankan — dạng chuẩn của cây, liệt kê đồng phân, gọi tên IUPAC
+│   ├── organic-engine.ts  bàn ghép CH₃ (lưới vuông), luật đặt/gỡ, đồng hồ và chấm bài
+│   └── organic-render.ts  vẽ canvas cho chế độ hữu cơ
+├── auth/                đăng nhập Google, giữ access token trong bộ nhớ
+├── runs/                mở ván và nộp kết quả lên backend
+├── music.ts             nhạc nền Web Audio API (dùng chung)
+└── setup.ts             kiểu cấu hình một ván chơi (dùng chung)
+```
+
+- `frontend/src/components/`: giao diện React, chọn chế độ & ion, HUD, bảng ion, đề bài đồng phân, nhật ký, bảng xếp hạng.
+
+Mỗi engine phát sự kiện qua một union đã đánh kiểu (`GameEvent`, `OrganicEvent`), nên khi thêm
+một loại sự kiện mới thì `switch` ở phía React sẽ báo lỗi biên dịch nếu quên xử lý.

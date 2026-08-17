@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import type { ReactElement } from 'react';
+import { Navigate, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom';
 import GameCanvas from './components/GameCanvas';
 import IonLegend from './components/IonLegend';
 import HUD from './components/HUD';
@@ -9,9 +11,10 @@ import GameOverScreen from './components/GameOverScreen';
 import OrganicGame from './components/OrganicGame';
 import AuthBar from './components/AuthBar';
 import ScoreBoard from './components/ScoreBoard';
+import LandingScreen from './components/LandingScreen';
 import { DEFAULT_ANION_IDS, DEFAULT_CATION_IDS } from './feature/in-organic/ions';
 import { MusicPlayer, OFF, TRACKS, trackById } from './feature/music';
-import { clearCallbackRoute } from './feature/auth/auth';
+import { CALLBACK_PATH } from './feature/auth/auth';
 import { AuthClient } from './feature/auth/auth-client';
 import { InorganicRunRecorder } from './feature/runs/runs';
 import { RunsClient } from './feature/runs/runs-client';
@@ -19,13 +22,18 @@ import type { AuthUser } from './feature/auth/auth';
 import type { OrganicRunPayload } from './feature/runs/runs';
 import type { GameEngine, GameEvent } from './feature/in-organic/engine';
 import type { OrganicResult } from './feature/organic/organic-engine';
-import type { GameSetup, MusicState } from './feature/setup';
+import { MODE_SLUG, modeFromSlug } from './feature/setup';
+import type { GameMode, GameSetup, MusicState } from './feature/setup';
 import './App.css';
 
-type Screen = 'start' | 'playing' | 'gameover' | 'scores';
+/** Ván chơi giữ state trong bộ nhớ nên /dang-choi và /ket-qua không tự khôi phục
+ *  được sau khi F5 — hai route đó có chốt chặn đưa người chơi về màn phù hợp. */
+type RunPhase = 'idle' | 'playing' | 'done';
 
 export default function App() {
-  const [screen, setScreen] = useState<Screen>('start');
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [runPhase, setRunPhase] = useState<RunPhase>('idle');
   const [score, setScore] = useState(0);
   const [level, setLevel] = useState(1);
   const [message, setMessage] = useState('');
@@ -41,8 +49,6 @@ export default function App() {
   });
   const [music, setMusic] = useState<MusicState>({ trackId: TRACKS[0].id, volume: 0.55, muted: false });
   const [previewing, setPreviewing] = useState(false);
-  /** Mở bảng xếp hạng từ màn nào thì "Quay lại" trả về đúng màn đó. */
-  const [scoresFrom, setScoresFrom] = useState<Screen>('start');
   const [account, setAccount] = useState<AuthUser | null>(null);
   const [authLoading, setAuthLoading] = useState(true);
 
@@ -96,12 +102,15 @@ export default function App() {
         if (!cancelled) setAccount(null);
       })
       .finally(() => {
-        clearCallbackRoute();
+        // Xoá /auth/callback khỏi lịch sử bằng router để state của router khớp URL.
+        if (window.location.pathname === CALLBACK_PATH) navigate('/', { replace: true });
         if (!cancelled) setAuthLoading(false);
       });
     return () => {
       cancelled = true;
     };
+    // Chỉ chạy một lần lúc mở trang; `navigate` ổn định nên không cần vào deps.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleLogout = async () => {
@@ -113,13 +122,13 @@ export default function App() {
   useEffect(() => {
     const player = playerRef.current;
     if (!player) return;
-    if (screen === 'playing') {
+    if (location.pathname === '/dang-choi') {
       setPreviewing(false);
       player.play(music.trackId);
     } else {
       player.stop();
     }
-  }, [screen, music.trackId]);
+  }, [location.pathname, music.trackId]);
 
   const handleTrackChange = (trackId: string) => {
     setMusic((current) => ({ ...current, trackId }));
@@ -147,10 +156,7 @@ export default function App() {
 
   const toggleMute = () => setMusic((current) => ({ ...current, muted: !current.muted }));
 
-  const openScores = (from: Screen) => {
-    setScoresFrom(from);
-    setScreen('scores');
-  };
+  const openScores = () => navigate('/bang-xep-hang');
 
   const flashMessage = (text: string) => {
     setMessage(text);
@@ -188,7 +194,8 @@ export default function App() {
         break;
       case 'gameover':
         setFinalStats({ score: event.score, compoundsMade: event.compoundsMade });
-        setScreen('gameover');
+        setRunPhase('done');
+        navigate('/ket-qua', { replace: true });
         if (recorderRef.current) void submitRun(event.score, recorderRef.current.toPayload());
         break;
       default:
@@ -200,7 +207,8 @@ export default function App() {
   const handleOrganicGameOver = useCallback((stats: OrganicResult, payload: OrganicRunPayload | null) => {
     setOrganicStats(stats);
     setFinalStats({ score: stats.score, compoundsMade: stats.found });
-    setScreen('gameover');
+    setRunPhase('done');
+    navigate('/ket-qua', { replace: true });
     if (payload) void submitRun(stats.score, payload);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -215,7 +223,8 @@ export default function App() {
     setEntries([]);
     setMessage('');
     setOrganicStats(null);
-    setScreen('playing');
+    setRunPhase('playing');
+    navigate('/dang-choi');
     setRunKey((key) => key + 1);
 
     // Mở ván ở server song song với việc vào màn chơi — không bắt người chơi đợi
@@ -231,71 +240,129 @@ export default function App() {
   };
 
   const engine = engineRef.current;
+  const isLanding = location.pathname === '/' || location.pathname.startsWith('/cach-choi');
+  const authBar = <AuthBar user={account} loading={authLoading} onLogout={handleLogout} />;
+
+  const renderLanding = (openMode: GameMode | null) => (
+    <LandingScreen
+      authSlot={authBar}
+      openMode={openMode}
+      onOpenDetail={(mode) => navigate(`/cach-choi/${MODE_SLUG[mode]}`)}
+      onCloseDetail={() => navigate('/')}
+      onPlay={(mode) => {
+        if (mode) setSetup((current) => ({ ...current, mode }));
+        navigate('/choi');
+      }}
+      onOpenScores={openScores}
+    />
+  );
+
+  const playing =
+    setup.mode === 'organic' ? (
+      <OrganicGame
+        key={runKey}
+        difficultyId={setup.difficultyId}
+        music={{
+          trackName: trackById(music.trackId)?.name,
+          muted: music.muted,
+          onToggleMute: toggleMute,
+        }}
+        onGameOver={handleOrganicGameOver}
+      />
+    ) : (
+      <div className="game-layout" key={runKey}>
+        <div className="game-main">
+          <HUD
+            score={score}
+            level={level}
+            message={message}
+            trackName={trackById(music.trackId)?.name}
+            muted={music.muted}
+            onToggleMute={toggleMute}
+          />
+          <GameCanvas onEvent={handleEvent} engineRef={engineRef} setup={setup} />
+        </div>
+        <div className="side-panels">
+          {engine && <IonLegend cations={engine.activeCations} anions={engine.activeAnions} />}
+          <CompoundLog entries={entries} />
+        </div>
+      </div>
+    );
 
   return (
-    <div className="app">
-      {screen !== 'playing' && (
-        <AuthBar user={account} loading={authLoading} onLogout={handleLogout} />
-      )}
-      {screen === 'start' && (
-        <StartScreen
-          setup={setup}
-          music={{
-            trackId: music.trackId,
-            volume: music.volume,
-            previewing,
-            onChange: handleTrackChange,
-            onVolume: (volume) => setMusic((current) => ({ ...current, volume })),
-            onPreview: handlePreview,
-          }}
-          onStart={startGame}
-          onOpenScores={() => openScores('start')}
-        />
-      )}
-      {screen === 'scores' && (
-        <ScoreBoard runs={getRuns()} signedIn={account !== null} onClose={() => setScreen(scoresFrom)} />
-      )}
-      {screen === 'gameover' && (
-        <GameOverScreen
-          score={finalStats.score}
-          compoundsMade={finalStats.compoundsMade}
-          organic={organicStats}
-          onRestart={() => startGame()}
-          onChangeSetup={() => setScreen('start')}
-          onOpenScores={() => openScores('gameover')}
-        />
-      )}
-      {screen === 'playing' && setup.mode === 'organic' && (
-        <OrganicGame
-          key={runKey}
-          difficultyId={setup.difficultyId}
-          music={{
-            trackName: trackById(music.trackId)?.name,
-            muted: music.muted,
-            onToggleMute: toggleMute,
-          }}
-          onGameOver={handleOrganicGameOver}
-        />
-      )}
-      {screen === 'playing' && setup.mode !== 'organic' && (
-        <div className="game-layout" key={runKey}>
-          <div className="game-main">
-            <HUD
-              score={score}
-              level={level}
-              message={message}
-              trackName={trackById(music.trackId)?.name}
-              muted={music.muted}
-              onToggleMute={toggleMute}
+    <div className={`app${isLanding ? ' app--landing' : ''}`}>
+      {/* Ở trang chủ thanh đăng nhập nằm trong nav, chỗ khác thì nổi góc phải. */}
+      {!isLanding && runPhase !== 'playing' && authBar}
+
+      <Routes>
+        <Route path="/" element={renderLanding(null)} />
+        <Route path="/cach-choi/:modeSlug" element={<ModeDetailRoute render={renderLanding} />} />
+
+        <Route
+          path="/choi"
+          element={
+            <StartScreen
+              setup={setup}
+              music={{
+                trackId: music.trackId,
+                volume: music.volume,
+                previewing,
+                onChange: handleTrackChange,
+                onVolume: (volume) => setMusic((current) => ({ ...current, volume })),
+                onPreview: handlePreview,
+              }}
+              onStart={startGame}
+              onOpenScores={openScores}
+              onBack={() => navigate('/')}
             />
-            <GameCanvas onEvent={handleEvent} engineRef={engineRef} setup={setup} />
-          </div>
-          <div className="side-panels">
-            {engine && <IonLegend cations={engine.activeCations} anions={engine.activeAnions} />}
-            <CompoundLog entries={entries} />
-          </div>
-        </div>
-      )}
+          }
+        />
+
+        {/* Ván chơi sống trong bộ nhớ nên chỉ chặn khi CHƯA có ván nào ('idle') —
+            tức là vào thẳng URL hoặc vừa F5. Không so bằng 'playing'/'done' vì lúc
+            kết thúc ván, state và điều hướng là hai cập nhật riêng: state commit
+            trước sẽ khiến chốt chặn đá người chơi đi ngay giữa lúc chuyển màn. */}
+        <Route
+          path="/dang-choi"
+          element={runPhase === 'idle' ? <Navigate to="/choi" replace /> : playing}
+        />
+        <Route
+          path="/ket-qua"
+          element={
+            runPhase !== 'idle' ? (
+              <GameOverScreen
+                score={finalStats.score}
+                compoundsMade={finalStats.compoundsMade}
+                organic={organicStats}
+                onRestart={() => startGame()}
+                onChangeSetup={() => navigate('/choi')}
+                onOpenScores={openScores}
+              />
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
+        />
+
+        <Route
+          path="/bang-xep-hang"
+          element={
+            <ScoreBoard runs={getRuns()} signedIn={account !== null} onClose={() => navigate(-1)} />
+          }
+        />
+
+        {/* Backend trả người chơi về đây sau khi Google xác nhận; effect ở trên sẽ
+            đổi phiên rồi điều hướng về trang chủ. */}
+        <Route path={CALLBACK_PATH} element={renderLanding(null)} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </div>
   );
+}
+
+/** Trang chủ với lớp chi tiết mở sẵn theo :modeSlug. Slug lạ thì quay về trang chủ. */
+function ModeDetailRoute({ render }: { render: (mode: GameMode) => ReactElement }) {
+  const { modeSlug } = useParams();
+  const mode = modeFromSlug(modeSlug);
+  return mode ? render(mode) : <Navigate to="/" replace />;
 }

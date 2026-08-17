@@ -12,6 +12,17 @@ export interface GameSetup {
   anionIds: string[];
 }
 
+/** Đoạn đường dẫn tương ứng mỗi chế độ, dùng cho URL kiểu /cach-choi/vo-co. */
+export const MODE_SLUG: Record<GameMode, string> = {
+  inorganic: 'vo-co',
+  organic: 'huu-co',
+};
+
+export const modeFromSlug = (slug: string | undefined): GameMode | null => {
+  const found = (Object.keys(MODE_SLUG) as GameMode[]).find((mode) => MODE_SLUG[mode] === slug);
+  return found ?? null;
+};
+
 /** Trạng thái nhạc nền dùng chung giữa màn hình bắt đầu và lúc đang chơi. */
 export interface MusicState {
   trackId: string;

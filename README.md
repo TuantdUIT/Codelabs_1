@@ -1,4 +1,4 @@
-# ⚗️ Ion Blaster
+# ⚗️ Che Games
 
 Game hóa học gồm **hai chế độ**, chọn ở màn hình bắt đầu:
 

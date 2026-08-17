@@ -8,6 +8,17 @@
   --danger: #ff6b6b;
   --success: #52d68a;
 
+  /* Lấy từ landing page: mỗi chế độ chơi một màu nhận diện, gradient xanh→tím
+     dành riêng cho hành động chính. Thẻ dùng nền trắng rất mờ + viền mảnh
+     thay cho màu đặc, nhờ vậy nổi lên trên nền gradient mà không bị nặng. */
+  --accent-2: #a855f7;
+  --mode-inorganic: #3b82f6;
+  --mode-organic: #22c55e;
+  --card-bg: rgba(255, 255, 255, 0.04);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --grad-primary: linear-gradient(135deg, #3b82f6, #a855f7);
+  --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.4);
+
   font: 16px/1.5 system-ui, 'Segoe UI', Roboto, sans-serif;
   color-scheme: dark;
   color: var(--text);
@@ -25,7 +36,12 @@
 body {
   margin: 0;
   min-height: 100svh;
-  background: radial-gradient(circle at 50% 0%, #16213a 0%, #0b1220 60%);
+  /* Hai vầng sáng lệch tâm của landing page, phủ lên nền chuyển màu chéo. */
+  background:
+    radial-gradient(circle at 18% 0%, rgba(59, 130, 246, 0.14), transparent 55%),
+    radial-gradient(circle at 82% 8%, rgba(168, 85, 247, 0.12), transparent 50%),
+    linear-gradient(160deg, #0b1220 0%, #111827 55%, #0b1220 100%);
+  background-attachment: fixed;
 }
 
 #root {

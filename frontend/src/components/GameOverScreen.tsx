@@ -30,7 +30,15 @@ export default function GameOverScreen({
             : `Hết giờ — bạn dựng được ${organic.found}/${organic.total} đồng phân`
           : `Bạn đã tổng hợp ${compoundsMade} hợp chất`}
       </p>
-      <div className="screen__score">{score} điểm</div>
+      <div className="result-card">
+        <span className="result-card__value">{score}</span>
+        <span className="result-card__unit">điểm</span>
+        <span className="result-card__meta">
+          {organic
+            ? `${organic.found}/${organic.total} đồng phân · ${won ? 'hoàn thành' : 'hết giờ'}`
+            : `${compoundsMade} hợp chất đã tổng hợp`}
+        </span>
+      </div>
       <div className="screen__actions">
         <button className="btn btn--primary" onClick={onRestart}>
           Chơi lại

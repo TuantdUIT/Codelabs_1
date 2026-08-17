@@ -10,15 +10,60 @@
 .screen {
   max-width: 620px;
   text-align: center;
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  border-radius: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
   padding: 36px 32px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(12px);
 }
 
 .screen h1 {
   font-size: 34px;
+}
+
+/* ---------- hero của màn bắt đầu ---------- */
+.hero {
+  margin-bottom: 26px;
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: color-mix(in srgb, var(--mode-inorganic) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--mode-inorganic) 30%, transparent);
+  color: #93c5fd;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+
+.hero__title {
+  font-size: clamp(2.4rem, 6vw, 3.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px;
+}
+
+.hero__title-accent {
+  background: linear-gradient(135deg, #3b82f6, #a855f7, #22c55e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero__quote {
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #e2e8f0;
+  border-left: 3px solid var(--mode-inorganic);
+  padding-left: 16px;
+  text-align: left;
+  margin: 0 0 18px;
 }
 
 .screen__subtitle {
@@ -26,11 +71,39 @@
   margin-bottom: 20px;
 }
 
-.screen__score {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--success);
+/* Ô điểm cuối ván — khối gradient của landing page, thay cho .screen__score cũ */
+.result-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(168, 85, 247, 0.15));
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 28px 24px;
   margin-bottom: 24px;
+}
+
+.result-card__value {
+  font-size: clamp(2.6rem, 8vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text-h);
+}
+
+.result-card__unit {
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  opacity: 0.7;
+}
+
+.result-card__meta {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--text);
+  opacity: 0.85;
 }
 
 .screen--wide {
@@ -361,9 +434,9 @@
 }
 
 .btn--primary {
-  background: linear-gradient(135deg, #4f9cff, #2e6fd8);
-  color: white;
-  box-shadow: 0 8px 24px rgba(79, 156, 255, 0.35);
+  background: var(--grad-primary);
+  color: #f8fafc;
+  box-shadow: 0 10px 40px rgba(59, 130, 246, 0.4);
 }
 
 .btn--primary:hover {
@@ -423,10 +496,11 @@
   display: flex;
   align-items: center;
   gap: 24px;
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 10px 18px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 12px 20px;
+  backdrop-filter: blur(12px);
 }
 
 .hud__stat {
@@ -627,6 +701,96 @@
 }
 
 /* ---------- chọn chế độ chơi ---------- */
+/* Thẻ lớn ở màn bắt đầu, lấy bố cục từ landing page: icon, tên, mô tả,
+   và vài công thức mẫu để thấy ngay mình sắp ghép cái gì. */
+.mode-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.mode-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px;
+  text-align: left;
+  background: var(--card-bg);
+  border: 1px solid color-mix(in srgb, var(--mode-color) 25%, transparent);
+  border-radius: 20px;
+  color: var(--text);
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.mode-card--inorganic {
+  --mode-color: var(--mode-inorganic);
+}
+
+.mode-card--organic {
+  --mode-color: var(--mode-organic);
+}
+
+.mode-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--mode-color) 45%, transparent);
+}
+
+.mode-card.is-active {
+  border-color: color-mix(in srgb, var(--mode-color) 60%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--mode-color) 30%, transparent),
+    0 12px 36px color-mix(in srgb, var(--mode-color) 18%, transparent);
+}
+
+.mode-card__icon {
+  font-size: 34px;
+  line-height: 1;
+}
+
+.mode-card__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.mode-card__head b {
+  font-size: 20px;
+  color: var(--text-h);
+}
+
+.mode-card__state {
+  font-size: 13px;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--mode-color) 75%, white);
+}
+
+.mode-card__note {
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.55;
+  opacity: 0.8;
+}
+
+.mode-card__samples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Pill công thức — dùng chung cho thẻ chế độ và mọi chỗ cần khoe công thức. */
+.formula-pill {
+  background: color-mix(in srgb, var(--mode-color, var(--accent)) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--mode-color, var(--accent)) 30%, transparent);
+  color: color-mix(in srgb, var(--mode-color, var(--accent)) 55%, white);
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+/* Tab dạng thẻ nhỏ — bảng xếp hạng dùng lại */
 .mode-tabs {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -638,13 +802,15 @@
   display: flex;
   flex-direction: column;
   gap: 3px;
-  padding: 12px 14px;
+  padding: 14px 16px;
   text-align: left;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
   color: var(--text);
   cursor: pointer;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .mode-tab b {
@@ -858,10 +1024,11 @@
   align-items: center;
   gap: 10px;
   padding: 6px 8px 6px 14px;
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
+  background: rgba(11, 18, 32, 0.72);
+  border: 1px solid var(--card-border);
   border-radius: 999px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px);
 }
 
 .authbar__hint {
@@ -924,14 +1091,14 @@
 }
 
 .chip {
-  background: transparent;
+  background: var(--card-bg);
   color: var(--text);
-  border: 1px solid var(--border);
+  border: 1px solid var(--card-border);
   border-radius: 999px;
   padding: 6px 14px;
   font-size: 13px;
   cursor: pointer;
-  transition: border-color 0.15s ease, color 0.15s ease;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
 }
 
 .chip:hover {
@@ -958,10 +1125,29 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 14px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  padding: 12px 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  transition: border-color 0.15s ease;
+}
+
+.board__row:hover {
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+/* Ba hạng đầu được viền theo màu huy chương thay vì chỉ đổi màu chữ số */
+.board__row:has(.board__rank--1) {
+  border-color: rgba(255, 217, 61, 0.35);
+  background: linear-gradient(135deg, rgba(255, 217, 61, 0.08), var(--card-bg));
+}
+
+.board__row:has(.board__rank--2) {
+  border-color: rgba(215, 224, 240, 0.28);
+}
+
+.board__row:has(.board__rank--3) {
+  border-color: rgba(201, 138, 91, 0.3);
 }
 
 .board__rank {
@@ -1035,4 +1221,380 @@
 .board-empty--error {
   color: var(--danger);
   opacity: 1;
+}
+
+/* ---------- landing page ---------- */
+.landing {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px 40px;
+  text-align: left;
+}
+
+.landing__nav {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  margin-bottom: 8px;
+  background: rgba(11, 18, 32, 0.72);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.landing__brand {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+.landing__nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.landing__hero {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  align-items: center;
+  gap: 48px;
+  padding: clamp(32px, 6vw, 72px) 0 56px;
+}
+
+.landing__hero-text {
+  flex: 1 1 420px;
+  min-width: 280px;
+}
+
+.landing__hero-text .hero__title {
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+}
+
+.landing__hero-text .hero__quote {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  margin-bottom: 22px;
+}
+
+.landing__lead {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text);
+  opacity: 0.85;
+  max-width: 480px;
+  margin: 0 0 30px;
+}
+
+/* Bong bóng ion trôi quanh hero */
+.landing__orbit {
+  position: relative;
+  flex: 1 1 360px;
+  min-width: 280px;
+  height: 360px;
+}
+
+.orbit-bubble {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  backdrop-filter: blur(6px);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes floatA {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(8px, -18px); }
+}
+
+@keyframes floatB {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-10px, 16px); }
+}
+
+@keyframes floatC {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-12px, -12px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-bubble {
+    animation: none;
+  }
+}
+
+.landing__section {
+  padding-bottom: 72px;
+}
+
+.landing__section-title {
+  text-align: center;
+  font-size: clamp(1.7rem, 4vw, 2.2rem);
+  margin-bottom: 12px;
+}
+
+.landing__section-note {
+  text-align: center;
+  color: var(--text);
+  opacity: 0.8;
+  margin: 0 0 36px;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.feature-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 28px;
+  text-align: center;
+  backdrop-filter: blur(12px);
+}
+
+.feature-card__icon {
+  display: block;
+  font-size: 34px;
+  margin-bottom: 14px;
+}
+
+.feature-card h3 {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+.feature-card p {
+  color: var(--text);
+  opacity: 0.8;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.cta-panel {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(168, 85, 247, 0.15));
+  border: 1px solid var(--card-border);
+  border-radius: 32px;
+  padding: clamp(36px, 6vw, 64px) 32px;
+}
+
+.cta-panel h2 {
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  margin-bottom: 14px;
+}
+
+.cta-panel p {
+  color: var(--text);
+  opacity: 0.85;
+  margin: 0 0 28px;
+}
+
+.landing__footer {
+  border-top: 1px solid var(--card-border);
+  padding: 32px 0 8px;
+  text-align: center;
+  color: var(--text);
+  opacity: 0.6;
+  font-size: 14px;
+}
+
+/* ---------- landing: lớp chi tiết từng chế độ ---------- */
+.landing__modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(6, 10, 20, 0.94);
+  backdrop-filter: blur(10px);
+  overflow-y: auto;
+}
+
+.landing__modal--inorganic {
+  --mode-color: var(--mode-inorganic);
+}
+
+.landing__modal--organic {
+  --mode-color: var(--mode-organic);
+}
+
+.landing__modal-inner {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: clamp(24px, 5vw, 56px) 24px 80px;
+  position: relative;
+}
+
+.landing__modal-close {
+  position: sticky;
+  top: 16px;
+  float: right;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-h);
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.landing__modal-close:hover {
+  border-color: var(--mode-color);
+}
+
+.hero__badge--mode {
+  background: color-mix(in srgb, var(--mode-color) 12%, transparent);
+  border-color: color-mix(in srgb, var(--mode-color) 30%, transparent);
+  color: color-mix(in srgb, var(--mode-color) 55%, white);
+  clear: both;
+}
+
+.landing__modal-title {
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  line-height: 1.15;
+  margin: 0 0 16px;
+}
+
+.landing__modal-intro {
+  color: var(--text);
+  opacity: 0.85;
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 0 0 36px;
+  max-width: 640px;
+}
+
+.landing__modal-heading {
+  font-size: 18px;
+  margin: 0 0 16px;
+}
+
+.how-list {
+  list-style: none;
+  display: grid;
+  gap: 14px;
+  margin: 0 0 36px;
+  padding: 0;
+}
+
+.how-list__item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 18px 20px;
+  color: #e2e8f0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.how-list__num {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--mode-color) 20%, transparent);
+  color: color-mix(in srgb, var(--mode-color) 55%, white);
+}
+
+.rule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.rule-box {
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.rule-box__icon {
+  display: block;
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.rule-box h4 {
+  font-size: 15px;
+  margin: 0 0 8px;
+}
+
+.rule-box p {
+  color: #cbd5e1;
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.rule-box--lose {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.rule-box--score {
+  background: color-mix(in srgb, var(--mode-color) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--mode-color) 30%, transparent);
+}
+
+.landing__modal-samples {
+  margin-bottom: 40px;
+}
+
+.btn--lg {
+  font-size: 17px;
+  padding: 16px 32px;
+}
+
+.btn--pill {
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+@media (max-width: 720px) {
+  .landing__orbit {
+    height: 260px;
+  }
+
+  .landing__nav-actions .btn--ghost {
+    display: none;
+  }
+}
+
+/* Trang chủ tự dàn theo chiều dọc, không bị .app căn giữa như các màn thẻ */
+.app--landing {
+  align-items: stretch;
+  padding: 0;
+}
+
+/* Thanh đăng nhập khi nằm trong nav của trang chủ: bỏ định vị nổi */
+.landing__nav .authbar {
+  position: static;
+  box-shadow: none;
+  background: transparent;
+  border-color: transparent;
+  padding: 0 4px 0 0;
 }

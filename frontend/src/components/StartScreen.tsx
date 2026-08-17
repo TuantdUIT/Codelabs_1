@@ -14,9 +14,22 @@ import { possibleCompounds } from '../feature/in-organic/chemistry';
 import { DIFFICULTIES } from '../feature/organic/organic-engine';
 import type { GameMode, GameSetup } from '../feature/setup';
 
-const MODES: { id: GameMode; label: string; note: string }[] = [
-  { id: 'inorganic', label: '⚗️ Vô cơ', note: 'Bắn bong bóng ion ghép hợp chất' },
-  { id: 'organic', label: '🧪 Hữu cơ', note: 'Ghép gốc CH₃ dựng đồng phân ankan' },
+/** Công thức mẫu chỉ để trưng bày trên thẻ chọn chế độ, không ảnh hưởng luật chơi. */
+const MODES: { id: GameMode; icon: string; label: string; note: string; samples: string[] }[] = [
+  {
+    id: 'inorganic',
+    icon: '🧪',
+    label: 'Vô cơ',
+    note: 'Ghép cation và anion thành hợp chất cân bằng điện tích, tự chọn bộ ion trước mỗi ván.',
+    samples: ['NaCl', 'Ca(OH)₂', 'Al₂(SO₄)₃', 'MgCl₂'],
+  },
+  {
+    id: 'organic',
+    icon: '🧬',
+    label: 'Hữu cơ',
+    note: 'Ghép gốc CH₃ để dựng đúng đồng phân ankan, luyện tư duy mạch carbon.',
+    samples: ['CH₄', 'C₂H₆', 'C₃H₈', 'iso-C₄H₁₀'],
+  },
 ];
 
 interface StartScreenProps {
@@ -30,10 +43,11 @@ interface StartScreenProps {
     onPreview: () => void;
   };
   onStart: (config: GameSetup) => void;
+  onBack: () => void;
   onOpenScores: () => void;
 }
 
-export default function StartScreen({ setup, music, onStart, onOpenScores }: StartScreenProps) {
+export default function StartScreen({ setup, music, onStart, onOpenScores, onBack }: StartScreenProps) {
   const [mode, setMode] = useState<GameMode>(setup.mode);
   const [difficultyId, setDifficultyId] = useState(setup.difficultyId);
   const [cationIds, setCationIds] = useState(setup.cationIds);
@@ -52,23 +66,43 @@ export default function StartScreen({ setup, music, onStart, onOpenScores }: Sta
 
   return (
     <div className="screen screen--wide">
-      <h1>⚗️ Ion Blaster</h1>
-      <p className="screen__subtitle">
-        {mode === 'organic'
-          ? 'Ghép các gốc CH₃ để dựng lại mọi đồng phân của một ankan'
-          : 'Bắn tự do, ghép các ion thành hợp chất vô cơ đúng công thức'}
-      </p>
+      <div className="hero">
+        <span className="hero__badge">🧪 Game giáo dục hóa học</span>
+        <h1 className="hero__title">
+          Che <span className="hero__title-accent">Games</span>
+        </h1>
+        <p className="hero__quote">
+          “Để vận dụng cao trở thành nơi phân hóa điểm số, không phải sự bất cẩn của việc sai ngu.”
+        </p>
+        <p className="screen__subtitle">
+          {mode === 'organic'
+            ? 'Ghép các gốc CH₃ để dựng lại mọi đồng phân của một ankan'
+            : 'Bắn tự do, ghép các ion thành hợp chất vô cơ đúng công thức'}
+        </p>
+      </div>
 
-      <div className="mode-tabs">
+      <div className="mode-cards">
         {MODES.map((item) => (
           <button
             key={item.id}
             type="button"
-            className={`mode-tab${mode === item.id ? ' is-active' : ''}`}
+            className={`mode-card mode-card--${item.id}${mode === item.id ? ' is-active' : ''}`}
             onClick={() => setMode(item.id)}
+            aria-pressed={mode === item.id}
           >
-            <b>{item.label}</b>
-            <em>{item.note}</em>
+            <span className="mode-card__icon">{item.icon}</span>
+            <span className="mode-card__head">
+              <b>{item.label}</b>
+              <span className="mode-card__state">{mode === item.id ? 'Đang chọn' : 'Chọn'}</span>
+            </span>
+            <em className="mode-card__note">{item.note}</em>
+            <span className="mode-card__samples">
+              {item.samples.map((formula) => (
+                <span key={formula} className="formula-pill">
+                  {formula}
+                </span>
+              ))}
+            </span>
           </button>
         ))}
       </div>
@@ -211,6 +245,9 @@ export default function StartScreen({ setup, music, onStart, onOpenScores }: Sta
         </button>
         <button className="btn btn--ghost" onClick={onOpenScores}>
           🏆 Bảng xếp hạng
+        </button>
+        <button className="btn btn--ghost" onClick={onBack}>
+          ← Trang chủ
         </button>
       </div>
     </div>
